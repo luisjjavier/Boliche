@@ -1,60 +1,69 @@
 package rd.boliche.frame;
-import java.io.BufferedReader;
-
-
+import java.util.ArrayList;
+import rd.boliche.BowlingScoreFile;
 
 public class ScoreFrame
 {
-	BufferedReader file;
-	Score [] score = new Score[12];
+	Score [] score1 = new Score[12];
+	Score [] score2 = new Score[12];
+	ArrayList<Integer> player1LineScore;
+	ArrayList<Integer> player2LineScore;
 	
 	public ScoreFrame(BowlingScoreFile bf)
 	{
-		file = bf.getFile();
-		fillFrame();
-		completeScore();
+		player1LineScore = bf.getPlayerOneScore();
+		player2LineScore = bf.getPlayerTwoScore();
+		setScoreOne();
+		setScoreTwo();	
 	}
 	
-	private void fillFrame()
+	private void setScoreOne()
 	{
-		String s;
-		try
-		{
-			for(int i = 0; i<10; i++)
-			{
-				s = file.readLine();
-				score[i] = new Score(new Integer(s), new Integer(file.readLine()));
-			}
-			file.close();
-		}
-		catch(Exception e)
-		{
-			System.out.println(e.getLocalizedMessage());
+		int limit = this.player1LineScore.size()/2;
+		System.out.println("Tamano del limite "+limit);
+		for(int i = 0; i<limit+1; i+=2)
+		{	
+			this.score1[i] = new Score(this.player1LineScore.get(i), this.player1LineScore.get(i+1));
+			System.out.println(score1[i].getFirstScore()+"\t|"+score1[i].getSecondScore()+"|\n"+score1[i].getTotal()+"\n");
 		}
 	}
 	
-	private void completeScore()
+	private void setScoreTwo()
 	{
-		int j = (score[9].isStrike()) ? 12: (score[9].isSpare()) ? 11 : 10;
-		for(int i = 0 ; i<j; i++)
+		int limit = this.player2LineScore.size()/2;
+		System.out.println("Tamano del limite "+limit);
+		for(int i = 0; i<limit+1; i+=2)
+		{	
+			this.score2[i] = new Score(this.player2LineScore.get(i), this.player2LineScore.get(i+1));
+			System.out.println(score2[i].getFirstScore()+"\t|"+score2[i].getSecondScore()+"|\n"+score2[i].getTotal()+"\n");
+		}
+	}
+	
+	
+	private void completePlayerOneScore()
+	{
+		int limit = this.player1LineScore.size()/2;
+		if(score1[11]!=null && score1[9].isStrike())
+			limit = 12;
+		else if(score1[10]!=null && score1[9].isSpare())
+			limit = 11;
+		for(int i = 0 ; i<limit; i++)
 		{
-			if(i == 10 && (!score[9].isStrike() || !score[9].isSpare()))
+			if(i == 10 && (!score1[9].isStrike() || !score1[9].isSpare()))
 				break;
 			
-			if(score[i].isStrike())
-				score[i].addToTotal(score[i+1].getTotal() + score[i+2].getTotal());
-			if(score[i].isSpare())
-				score[i].addToTotal(score[i+1].getTotal() + score[i+1].getFirstScore());
+			if(score1[i].isStrike())
+				score1[i].addToTotal(score1[i+1].getTotal() + score1[i+2].getTotal());
+			if(score1[i].isSpare())
+				score1[i].addToTotal(score1[i+1].getTotal() + score1[i+1].getFirstScore());
 			if(i>0)
-				score[i].addToTotal(score[i-1].getTotal());
-			score[i].printScore();
+				score1[i].addToTotal(score1[i-1].getTotal());
 		}
 	}
 	
-	public void print()
+	public Score [] getScoreOne()
 	{
-		for(Score ss:score)
-			if(ss != null)
-				ss.printScore();
+		return this.score1;
 	}
+
 }

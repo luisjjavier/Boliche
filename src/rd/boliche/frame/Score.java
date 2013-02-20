@@ -10,8 +10,8 @@ public final class Score
 	{
 		try
 		{
-			this.score1 = s1;
-			this.score2 = s2;
+			this.score1 = (s1>=0) ? s1 : 0; //si son negativos se convierten en 0
+			this.score2 = (s2>=0) ? s2 : 0;
 			if(s1+s2>10)
 				throw new IllegalStateException("Numero de puntuacion pasada");
 		}
@@ -23,21 +23,6 @@ public final class Score
 		this.scoreTotal = s1+s2; 
 	}
 
-	public void printScore()
-	{
-			if(this.isStrike())
-				System.out.println("X  | |");
-			else if(this.isSpare())
-				System.out.println(this.score1 + "  |"+"/|");
-			else if (this.score2 == 0)
-				System.out.println(this.score1 + "  |"+"-|");
-			else if(this.score1 + this.score2 <10)
-				System.out.println(this.score1+"  |"+this.score2+"|");
-				
-		
-		System.out.println(this.scoreTotal+"\n");
-	}
-	
 	public void addToTotal(int num)
 	{
 		this.scoreTotal += num;
@@ -51,6 +36,11 @@ public final class Score
 	public int getFirstScore()
 	{
 		return this.score1;
+	}
+	
+	public int getSecondScore()
+	{
+		return this.score2;
 	}
 	
 	public boolean isStrike()
