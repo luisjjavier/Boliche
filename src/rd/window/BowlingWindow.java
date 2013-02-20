@@ -1,4 +1,5 @@
 package rd.window;
+<<<<<<< HEAD
 
 import java.awt.EventQueue;
 
@@ -7,10 +8,13 @@ import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
+=======
+>>>>>>> 573b99bda4c939c3a6100ebabf4ee2a4fb971410
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+<<<<<<< HEAD
 import javax.swing.JFileChooser;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
@@ -86,12 +90,58 @@ public class BowlingWindow extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		if(e.getActionCommand() == "Browse")
+=======
+import javax.swing.*;
+
+import rd.boliche.BowlingScoreFile;
+import rd.boliche.frame.ScoreFrame;
+public class BowlingWindow extends JFrame implements ActionListener
+{
+	private File f;
+	private JFileChooser chooser = new JFileChooser();
+	private JButton b1 =new JButton("get");
+	private JPanel p1 = new JPanel();
+	private JTextArea t1 = new JTextArea();
+	
+	public BowlingWindow()
+	{
+		this.b1.setActionCommand("GET");
+		this.b1.addActionListener(this);
+		this.add(t1);
+		this.p1.add(b1);
+		this.add(p1);
+		this.p1.setAlignmentY(100);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.pack();
+		this.setSize(800,600);
+		this.setResizable(false);
+		this.setVisible(true);
+	}
+	
+	public File getFile()
+	{
+		return this.f;
+	}
+
+	public void actionPerformed(ActionEvent e) 
+	{
+		if (e.getActionCommand() == "GET")
+>>>>>>> 573b99bda4c939c3a6100ebabf4ee2a4fb971410
 		{
 			int val = chooser.showOpenDialog(this);
 			if(val == chooser.APPROVE_OPTION)
 			{
+<<<<<<< HEAD
 				this.textPane.setText(chooser.getSelectedFile().toString());
+=======
+				this.f = chooser.getSelectedFile();
+				new ScoreFrame(new BowlingScoreFile(this.f));
+>>>>>>> 573b99bda4c939c3a6100ebabf4ee2a4fb971410
 			}
 		}
 	}
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 573b99bda4c939c3a6100ebabf4ee2a4fb971410
