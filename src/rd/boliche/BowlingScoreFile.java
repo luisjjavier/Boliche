@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+import rd.window.BowlingErrorWindow;
+
 
 public final class BowlingScoreFile
 {
@@ -37,8 +39,8 @@ public final class BowlingScoreFile
 		}
 		catch(Exception e)
 		{
-			System.out.println(e.getLocalizedMessage());
-			System.exit(-1);
+			new BowlingErrorWindow(e.getLocalizedMessage());
+			//System.exit(-1);
 		}
 	}
 	
