@@ -1,7 +1,5 @@
 package rd.boliche.frame;
 
-import rd.window.BowlingErrorWindow;
-
 public final class Score 
 {
 	private int score1;
@@ -17,13 +15,9 @@ public final class Score
 			if(s1+s2>10)
 				throw new IllegalStateException("Numero de puntuacion pasada");
 		}
-		catch(IllegalStateException e1)
+		catch(Exception e)
 		{
-			new BowlingErrorWindow(e1.getLocalizedMessage());
-		}
-		catch(Exception e2)
-		{
-			System.out.println(e2.getLocalizedMessage());
+			System.out.println(e.getLocalizedMessage());
 			System.exit(-1);
 		}
 		this.scoreTotal = s1+s2; 
