@@ -40,7 +40,6 @@ public final class BowlingScoreFile
 		catch(Exception e)
 		{
 			new BowlingErrorWindow(e.getLocalizedMessage());
-			//System.exit(-1);
 		}
 	}
 	

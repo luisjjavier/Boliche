@@ -24,25 +24,7 @@ public class BowlingWindow extends JFrame implements ActionListener
 	JTextPane textPane;
 	private JLabel lblPlayer;
 	private JLabel lblPlayer_1;
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					BowlingWindow window = new BowlingWindow();
-					window.this.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
-	/**
-	 * Create the application.
-	 */
 	public BowlingWindow() 
 	{
 		super("Bowling Scores");
@@ -50,11 +32,8 @@ public class BowlingWindow extends JFrame implements ActionListener
 		this.setVisible(true);
 	}
 
-	/**
-	 * Initialize the contents of the this.
-	 */
-	private void initialize() {
-		//this = new JFrame();
+	private void initialize() 
+	{
 		this.setBounds(100, 100, 450, 300);
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
