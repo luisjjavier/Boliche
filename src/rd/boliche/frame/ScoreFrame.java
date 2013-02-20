@@ -1,5 +1,7 @@
 package rd.boliche.frame;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import rd.boliche.BowlingScoreFile;
 
 public class ScoreFrame
@@ -19,23 +21,27 @@ public class ScoreFrame
 	
 	private void setScoreOne()
 	{
+		if(this.player1LineScore.isEmpty())
+			return;
 		int limit = this.player1LineScore.size()/2;
-		System.out.println("Tamano del limite "+limit);
-		for(int i = 0; i<limit+1; i+=2)
+		int it = 0;
+		for(int i = 0; i<limit; i++)
 		{	
-			this.score1[i] = new Score(this.player1LineScore.get(i), this.player1LineScore.get(i+1));
-			System.out.println(score1[i].getFirstScore()+"\t|"+score1[i].getSecondScore()+"|\n"+score1[i].getTotal()+"\n");
+			this.score1[i] = new Score(this.player1LineScore.get(it), this.player1LineScore.get(it+1));
+			it+=2;
 		}
 	}
 	
 	private void setScoreTwo()
 	{
+		if (this.player2LineScore.isEmpty())
+			return;
 		int limit = this.player2LineScore.size()/2;
-		System.out.println("Tamano del limite "+limit);
-		for(int i = 0; i<limit+1; i+=2)
+		int it = 0;
+		for(int i = 0; i<limit; i++)
 		{	
-			this.score2[i] = new Score(this.player2LineScore.get(i), this.player2LineScore.get(i+1));
-			System.out.println(score2[i].getFirstScore()+"\t|"+score2[i].getSecondScore()+"|\n"+score2[i].getTotal()+"\n");
+			this.score2[i] = new Score(this.player2LineScore.get(it), this.player2LineScore.get(it+1));
+			it+=2;
 		}
 	}
 	
@@ -64,6 +70,11 @@ public class ScoreFrame
 	public Score [] getScoreOne()
 	{
 		return this.score1;
+	}
+	
+	public Score [] getScoreTwo()
+	{
+		return this.score2;
 	}
 
 }

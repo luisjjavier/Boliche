@@ -19,16 +19,26 @@ public final class BowlingScoreFile
 		{
 			this.file = new BufferedReader(new FileReader(f));
 			String s = null;
-			while((s = this.file.readLine()) != null && this.extracted.size()<40) 
-					this.extracted.add(new Integer(	s));
-			if(this.extracted.size() % 2 != 0)
+			while((s = this.file.readLine()) != null && this.extracted.size()<48) //va llenando la lista extracted del archivo
+			{
+				this.extracted.add(new Integer(	s));
+			}
+			
+			if(extracted.size() == 0)
+				throw new IllegalStateException("no se puede usar un archivo vacio");  //no se le da soporte a 
+			
+			if(this.extracted.size() % 2 != 0) //si falta el segundo tiro de cualquier jugador se asume como 0
 				this.extracted.add(new Integer(0));
-			this.setPlayerOneScore();
-			this.setPlayerTwoScore();
+			
+			if(this.extracted.size()>0)
+				this.setPlayerOneScore();				
+			if(this.extracted.size()>2) //si el segundo jugador todavia no a jugado por primera vez no pone su score
+				this.setPlayerTwoScore();
 		}
 		catch(Exception e)
 		{
 			System.out.println(e.getLocalizedMessage());
+			System.exit(-1);
 		}
 	}
 	
